@@ -9,18 +9,21 @@ DCMAKE_USER_MAKE_RULES_OVERRIDE=./ClangOverrides.txt
 build: clang
 	@cd ${DEBUG_OUTPUT} && make
 
+build-release: clang
+	@cd ${RELEASE_OUTPUT} && make
+
 configure: clang clean cmake-configure-debug
 
 run:
 	@${DEBUG_OUTPUT}/${PROJECT_NAME}
 
 run-release:
-	@${RELEASE_OUTPUT}
+	@${RELEASE_OUTPUT}/${PROJECT_NAME}
 
 clean:
 	@rm -rf ${OUTPUT}
 
-release: clang clean cmake-configure-release build
+release: clang clean cmake-configure-release build-release
 
 # utils
 clang:
